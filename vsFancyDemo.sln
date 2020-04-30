@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1062
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qcanpool", "src\qcanpool\qcanpool.vcxproj", "{B7859FC5-FC9B-3DA4-B9F4-1E851E88FA56}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fancydemo", "src\fancydemo\fancydemo.vcxproj", "{1DA07829-E9F0-332C-88D8-BA5E02B92311}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7859FC5-FC9B-3DA4-B9F4-1E851E88FA56}.Debug|x64.ActiveCfg = Debug|x64
+		{B7859FC5-FC9B-3DA4-B9F4-1E851E88FA56}.Debug|x64.Build.0 = Debug|x64
+		{B7859FC5-FC9B-3DA4-B9F4-1E851E88FA56}.Release|x64.ActiveCfg = Release|x64
+		{B7859FC5-FC9B-3DA4-B9F4-1E851E88FA56}.Release|x64.Build.0 = Release|x64
+		{1DA07829-E9F0-332C-88D8-BA5E02B92311}.Debug|x64.ActiveCfg = Debug|x64
+		{1DA07829-E9F0-332C-88D8-BA5E02B92311}.Debug|x64.Build.0 = Debug|x64
+		{1DA07829-E9F0-332C-88D8-BA5E02B92311}.Release|x64.ActiveCfg = Release|x64
+		{1DA07829-E9F0-332C-88D8-BA5E02B92311}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C23E65F-4477-4750-9ED6-C1392455A11B}
+	EndGlobalSection
+EndGlobal
