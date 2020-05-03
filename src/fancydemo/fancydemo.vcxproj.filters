@@ -167,252 +167,39 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <CustomBuild Include="debug\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
   </ItemGroup>
   <ItemGroup>
-    <None Include="resource\skin\0.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\skin\1.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\skin\10.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\skin\11.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\skin\12.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\skin\13.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\skin\14.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\skin\2.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\src\modules\qcustomplot\images\2d.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\skin\3.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\src\modules\qcustomplot\images\3d.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\skin\4.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\skin\5.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\skin\6.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\skin\7.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\skin\8.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\skin\9.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\align\align-bottom.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\align\align-center-horizontal.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\align\align-center-vertical.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\align\align-left.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\align\align-right.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\align\align-top.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\src\modules\qcustomplot\images\bar.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\mode\chart.png">
-      <Filter>Resource Files</Filter>
-    </None>
     <QtRcc Include="..\..\src\modules\qcustomplot\chart.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
     <None Include="resource\qss\classic.qss">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resource\tools\common\copy.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\common\cut.png">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="resource\skin\dark.cptheme">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\src\modules\qcustomplot\images\data.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\mode\debug.png">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resource\skin\default.cptheme">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\..\src\modules\qcustomplot\images\download.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\mode\edit.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\common\exit.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\mode\explorer.png">
-      <Filter>Resource Files</Filter>
-    </None>
     <QtRcc Include="fancydemo.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-    <None Include="resource\mode\graph.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\common\help.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\mode\home.png">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="resource\qm\lang_en_US.qm">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resource\qm\lang_zh_CN.qm">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\..\src\modules\qcustomplot\images\line.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\main\logo.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\mode\master.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\mode\menu.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\menu.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\common\new.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\common\open.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\common\option.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\mode\paint.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\common\paste.png">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="resource\qm\qt4.8.5\qt_zh_CN.qm">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resource\qm\qt5.8.0\qt_zh_CN.qm">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\common\recent.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\common\redo.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\mode\refer.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\src\modules\qcustomplot\images\refresh.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\common\save.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\common\save_all.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\skin.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\start.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\stop.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\suspend.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\common\undo.png">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resource\skin\white.cptheme">

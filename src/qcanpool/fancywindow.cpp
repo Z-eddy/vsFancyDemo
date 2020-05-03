@@ -39,7 +39,6 @@ private:
     FancyBar *fancyBar_;
 };
 
-
 FancyWindowPrivate::FancyWindowPrivate(FancyBar*item) :fancyBar_(item)
 {
 }
@@ -103,9 +102,11 @@ void FancyWindow::setWindowFlags(Qt::WindowFlags type)
     d->fancyBar()->updateWidgetFlags();
 }
 
+//»æ»­±³¾°
 void FancyWindow::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
+	//±³¾°±£´æÔÚ×¢²á±íÖÐ
     QSettings settings(QCanpoolPrivate::g_settingsOrganization,
                        QCanpoolPrivate::g_settingsApplication);
     QString skinName = settings.value("skin").toString();

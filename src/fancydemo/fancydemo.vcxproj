@@ -274,78 +274,21 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resource\skin\0.jpg" />
-    <None Include="resource\skin\1.jpg" />
-    <None Include="resource\skin\10.jpg" />
-    <None Include="resource\skin\11.jpg" />
-    <None Include="resource\skin\12.jpg" />
-    <None Include="resource\skin\13.jpg" />
-    <None Include="resource\skin\14.jpg" />
-    <None Include="resource\skin\2.jpg" />
-    <None Include="..\..\src\modules\qcustomplot\images\2d.png" />
-    <None Include="resource\skin\3.jpg" />
-    <None Include="..\..\src\modules\qcustomplot\images\3d.png" />
-    <None Include="resource\skin\4.jpg" />
-    <None Include="resource\skin\5.jpg" />
-    <None Include="resource\skin\6.jpg" />
-    <None Include="resource\skin\7.jpg" />
-    <None Include="resource\skin\8.jpg" />
-    <None Include="resource\skin\9.jpg" />
-    <None Include="resource\tools\align\align-bottom.png" />
-    <None Include="resource\tools\align\align-center-horizontal.png" />
-    <None Include="resource\tools\align\align-center-vertical.png" />
-    <None Include="resource\tools\align\align-left.png" />
-    <None Include="resource\tools\align\align-right.png" />
-    <None Include="resource\tools\align\align-top.png" />
-    <None Include="..\..\src\modules\qcustomplot\images\bar.png" />
-    <None Include="resource\mode\chart.png" />
     <QtRcc Include="..\..\src\modules\qcustomplot\chart.qrc">
       <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">chart</InitFuncName>
       <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">chart</InitFuncName>
     </QtRcc>
     <None Include="resource\qss\classic.qss" />
-    <None Include="resource\tools\common\copy.png" />
-    <None Include="resource\tools\common\cut.png" />
     <None Include="resource\skin\dark.cptheme" />
-    <None Include="..\..\src\modules\qcustomplot\images\data.png" />
-    <None Include="resource\mode\debug.png" />
     <None Include="resource\skin\default.cptheme" />
-    <None Include="..\..\src\modules\qcustomplot\images\download.png" />
-    <None Include="resource\mode\edit.png" />
-    <None Include="resource\tools\common\exit.png" />
-    <None Include="resource\mode\explorer.png" />
     <QtRcc Include="fancydemo.qrc">
       <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">fancydemo</InitFuncName>
       <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">fancydemo</InitFuncName>
     </QtRcc>
-    <None Include="resource\mode\graph.png" />
-    <None Include="resource\tools\common\help.png" />
-    <None Include="resource\mode\home.png" />
     <None Include="resource\qm\lang_en_US.qm" />
     <None Include="resource\qm\lang_zh_CN.qm" />
-    <None Include="..\..\src\modules\qcustomplot\images\line.png" />
-    <None Include="resource\main\logo.png" />
-    <None Include="resource\mode\master.png" />
-    <None Include="resource\mode\menu.png" />
-    <None Include="resource\tools\menu.png" />
-    <None Include="resource\tools\common\new.png" />
-    <None Include="resource\tools\common\open.png" />
-    <None Include="resource\tools\common\option.png" />
-    <None Include="resource\mode\paint.png" />
-    <None Include="resource\tools\common\paste.png" />
     <None Include="resource\qm\qt4.8.5\qt_zh_CN.qm" />
     <None Include="resource\qm\qt5.8.0\qt_zh_CN.qm" />
-    <None Include="resource\tools\common\recent.png" />
-    <None Include="resource\tools\common\redo.png" />
-    <None Include="resource\mode\refer.png" />
-    <None Include="..\..\src\modules\qcustomplot\images\refresh.png" />
-    <None Include="resource\tools\common\save.png" />
-    <None Include="resource\tools\common\save_all.png" />
-    <None Include="resource\tools\skin.png" />
-    <None Include="resource\tools\start.png" />
-    <None Include="resource\tools\stop.png" />
-    <None Include="resource\tools\suspend.png" />
-    <None Include="resource\tools\common\undo.png" />
     <None Include="resource\skin\white.cptheme" />
   </ItemGroup>
   <ItemGroup>
