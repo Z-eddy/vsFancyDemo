@@ -32,7 +32,7 @@ class QCANPOOL_SHARED_EXPORT FancyBar : public QWidget
 {
     Q_OBJECT
 public:
-    enum AdditionalControlPosition {
+    enum AdditionalControlPosition {//设置加入的控件所处位置
         TitlePosition, MenuPosition
     };
 
