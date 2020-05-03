@@ -27,6 +27,7 @@ class QMenuBar;
 class QuickAccessBar;
 class FancyBarPrivate;
 
+//定制的标题栏
 class QCANPOOL_SHARED_EXPORT FancyBar : public QWidget
 {
     Q_OBJECT

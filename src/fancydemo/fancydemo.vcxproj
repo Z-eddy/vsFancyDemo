@@ -351,6 +351,11 @@
   <ItemGroup>
     <ResourceCompile Include="fancydemo.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\qcanpool\qcanpool.vcxproj">
+      <Project>{b7859fc5-fc9b-3da4-b9f4-1e851e88fa56}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />

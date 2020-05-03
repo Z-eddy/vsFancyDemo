@@ -28,47 +28,52 @@
 #include <QSettings>
 #include <QPainter>
 
+//管理FancyBar(定制的标题栏)
 class FancyWindowPrivate
 {
 public:
-    FancyWindowPrivate();
+    FancyWindowPrivate(FancyBar*item);
+	FancyBar* fancyBar();
 
-    FancyBar *fancyBar;
+private:
+    FancyBar *fancyBar_;
 };
 
 
-FancyWindowPrivate::FancyWindowPrivate()
+FancyWindowPrivate::FancyWindowPrivate(FancyBar*item) :fancyBar_(item)
 {
-    fancyBar = nullptr;
+}
+
+FancyBar* FancyWindowPrivate::fancyBar() {
+	return fancyBar_;
 }
 
 FancyWindow::FancyWindow(QWidget *parent)
-    : QMainWindow(parent), d(new FancyWindowPrivate())
+    : QMainWindow(parent), d(new FancyWindowPrivate(new FancyBar(this)))
 {
-    QMainWindow::setWindowFlags(Qt::FramelessWindowHint
+	//为了无边框
+    QMainWindow::setWindowFlags(Qt::FramelessWindowHint//无边框
                    | Qt::WindowSystemMenuHint
                    | Qt::WindowMinimizeButtonHint
                    | Qt::WindowMaximizeButtonHint
                    | Qt::Window
                   );
-    d->fancyBar = new FancyBar(this);
-    connect(d->fancyBar, SIGNAL(maximizationChanged(bool)), this, SIGNAL(resizable(bool)));
-    setMenuWidget(d->fancyBar);
-    setMouseTracking(true);
+    connect(d->fancyBar(), SIGNAL(maximizationChanged(bool)), this, SIGNAL(resizable(bool)));
+    this->setMenuWidget(d->fancyBar());
+    this->setMouseTracking(true);
     QRect geom = ScreenHelper::normalRect();
-    resize(geom.width(), geom.height());
-    raise();
-    activateWindow();
+    this->resize(geom.width(), geom.height());
+    this->raise();//Z在最前面
+    this->activateWindow();//设定为活动窗口,效果类似鼠标点击了title bar
 }
 
 FancyWindow::~FancyWindow()
 {
-    delete d;
 }
 
 FancyBar *FancyWindow::fancyBar() const
 {
-    return d->fancyBar;
+    return d->fancyBar();
 }
 
 void FancyWindow::setFixedSize(const QSize &s)
@@ -78,7 +83,7 @@ void FancyWindow::setFixedSize(const QSize &s)
 
 void FancyWindow::setFixedSize(int w, int h)
 {
-    d->fancyBar->setWidgetResizable(false);
+    d->fancyBar()->setWidgetResizable(false);//这一堆fix函数只为了这一条
     QWidget::setFixedSize(w, h);
 }
 
@@ -95,7 +100,7 @@ void FancyWindow::setFixedHeight(int h)
 void FancyWindow::setWindowFlags(Qt::WindowFlags type)
 {
     QMainWindow::setWindowFlags(type);
-    d->fancyBar->updateWidgetFlags();
+    d->fancyBar()->updateWidgetFlags();
 }
 
 void FancyWindow::paintEvent(QPaintEvent *event)

@@ -80,6 +80,7 @@ QRect ScreenHelper::normalRect()
 #else
     geom = QGuiApplication::primaryScreen()->availableGeometry();
 #endif
+	//当前屏幕的2/3大小,左上角顶点右下移动100像素
     return QRect(geom.x() + 100, geom.y() + 100,
                  2 * geom.width() / 3, 2 * geom.height() / 3);
 }

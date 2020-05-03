@@ -30,9 +30,10 @@ class QCANPOOL_SHARED_EXPORT ScreenHelper
 public:
     ScreenHelper();
 
-    int currentScreen(const int x);
+    int currentScreen(const int x);//x指的是期望屏幕的width
     QRect screenRect(const int current);
 
+	//当前屏幕的2/3大小,左上角顶点右下移动100像素
     static QRect normalRect();
 
 private:

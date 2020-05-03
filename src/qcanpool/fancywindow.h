@@ -21,6 +21,7 @@
 #define FANCYWINDOW_H
 
 #include <QMainWindow>
+#include<QSharedPointer>
 #include "qcanpool_global.h"
 
 class FancyBar;
@@ -34,8 +35,8 @@ public:
 
     FancyBar* fancyBar() const;
 
-    void setFixedSize(const QSize &s);
-    void setFixedSize(int w, int h);
+    void setFixedSize(const QSize &s);//调用setFixedSize(int w, int h)
+    void setFixedSize(int w, int h);//非虚函数重载,强行遮盖掉基类的函数,插入FancyBar的函数调用,再调用基类的函数
     void setFixedWidth(int w);
     void setFixedHeight(int h);
 
@@ -48,7 +49,7 @@ protected:
     virtual void paintEvent(QPaintEvent *event);
 
 private:
-    FancyWindowPrivate *d;
+    QSharedPointer<FancyWindowPrivate> d;
 };
 
 #endif // FANCYWINDOW_H
