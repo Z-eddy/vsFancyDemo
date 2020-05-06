@@ -119,11 +119,11 @@ public:
     QSpacerItem     *m_leftSpacerItem;
     QSpacerItem     *m_rightSpacerItem;
     QLabel          *m_titleLabel;
-    QHBoxLayout     *m_titleAdditionalControlArea;
+    QHBoxLayout     *m_titleAdditionalControlArea;//title右侧的帮助等
     FancyButton     *m_maximizeButton;
     FancyButton     *m_minimizeButton;
     FancyButton     *m_closeButton;
-    QWidget         *m_systemGroup;
+    QWidget         *m_systemGroup;//右上角关闭、最小化、最大化
     bool m_bQuickAccessVisible;
 
     // menu widget
@@ -428,19 +428,23 @@ void FancyBarPrivate::createTitleWidget()
 {
     m_titleWidget = new QWidget();
     m_titleWidget->setFixedHeight(m_titleBarHeight);
-    createWindowButtons();
+    createWindowButtons();//logo、最大化、最小化、还原按钮
 
+	//占位条
     m_leftSpacerItem = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Minimum);
     m_rightSpacerItem = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
+	//快速访问栏
     m_quickAccessBar = new QuickAccessBar();
-    m_quickAccessBar->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    m_quickAccessBar->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);//设置布局为可伸缩
     m_quickAccessBar->hide();
 
+	//title右侧的帮助等
     m_titleAdditionalControlArea = new QHBoxLayout();
     m_titleAdditionalControlArea->setMargin(0);
     m_titleAdditionalControlArea->setSpacing(0);
 
+	//右上角关闭、最小化、最大化
     m_systemGroup = new QWidget();
     QHBoxLayout *systemButtonLayout = new QHBoxLayout();
     systemButtonLayout->setMargin(0);
@@ -450,6 +454,7 @@ void FancyBarPrivate::createTitleWidget()
     systemButtonLayout->addWidget(m_closeButton/*, 0, Qt::AlignTop*/);
     m_systemGroup->setLayout(systemButtonLayout);
 
+	//组合titleBar
     QHBoxLayout *layout = new QHBoxLayout();
     layout->setContentsMargins(1, 0, 0, 0);
     layout->setSpacing(0);
@@ -467,14 +472,17 @@ void FancyBarPrivate::createMenuWidget()
 {
     m_menuWidget = new QWidget();
     m_menuWidget->setFixedHeight(m_menuBarHeight);
-    m_menuWidget->hide();
+    m_menuWidget->hide();//默认隐藏menu
 
+	//Application按钮
     m_applicationButton = new FancyButton();
     m_applicationButton->setHasMenu(true);
     m_applicationButton->setText(tr("Application"));
     m_applicationButton->setToolButtonStyle(Qt::ToolButtonTextOnly);
     m_applicationButton->setNormalColor(QColor(240, 130, 0));
     connect(m_applicationButton, SIGNAL(menuTriggered(QMouseEvent *)), this, SLOT(applicationMenuTriggered(QMouseEvent *)));
+
+	//Application按钮触发后的弹出界面
     m_applicationWidget = new QWidget(this);
     QVBoxLayout *applicationLayout = new QVBoxLayout();
     applicationLayout->setMargin(0);
@@ -509,41 +517,46 @@ void FancyBarPrivate::createMenuWidget()
 
 void FancyBarPrivate::createWindowButtons()
 {
+	//logo图标
     m_logoButton = new FancyButton();
     m_logoButton->setHasMenu(true);
 	//logo图标,在没设定的时候有个默认的图标,不知道在哪里
     m_logoButton->setIcon(QIcon(":/main/logo"));
     connect(m_logoButton, SIGNAL(menuTriggered(QMouseEvent *)), this, SLOT(systemMenuTriggered(QMouseEvent *)));
 
+	//title
     m_titleLabel = new QLabel();
     QFont font("Microsoft Yahei", 10);
     m_titleLabel->setFont(font);
     m_titleLabel->setAlignment(Qt::AlignCenter);
     m_titleLabel->setStyleSheet("color:white;");
 
+	//最小化
     m_minimizeButton = new FancyButton();
     m_minimizeButton->setIcon(QIcon(":/main/min"));
     m_minimizeButton->setToolTip(tr("minimize"));
 //    m_minimizeButton->setIconSize(QSize(22,22));
     connect(m_minimizeButton, SIGNAL(clicked(bool)), this, SLOT(slotWindowButtonClicked()));
 
+	//最大化
     m_maximizeButton = new FancyButton();
     m_maximizeButton->setIcon(QIcon(":/main/max"));
     m_maximizeButton->setToolTip(tr("maximize"));
 //    m_maximizeButton->setIconSize(QSize(22,22));
     connect(m_maximizeButton, SIGNAL(clicked(bool)), this, SLOT(slotWindowButtonClicked()));
 
+	//关闭
     m_closeButton = new FancyButton();
     m_closeButton->setIcon(QIcon(":/main/close"));
     m_closeButton->setToolTip(tr("close"));
     m_closeButton->setIconSize(QSize(22, 22));
     connect(m_closeButton, SIGNAL(clicked(bool)), this, SLOT(slotWindowButtonClicked()));
-    m_closeButton->setHoverColor(QColor(207, 0, 0, 230));
-    m_closeButton->setPressColor(QColor(207, 0, 0, 150));
+    m_closeButton->setHoverColor(QColor(207, 0, 0, 230));//关闭按钮移动到上面显示红色
+    m_closeButton->setPressColor(QColor(207, 0, 0, 150));//按下时半透明红色
 
     m_menu = new QMenu(this);
-    connect(m_menu, SIGNAL(aboutToShow()), this, SLOT(aboutToShowSystemMenu()));
-    connect(m_menu, SIGNAL(aboutToHide()), this, SLOT(aboutToHideSystemMenu()));
+    connect(m_menu, SIGNAL(aboutToShow()), this, SLOT(aboutToShowSystemMenu()));//于显示前触发
+    connect(m_menu, SIGNAL(aboutToHide()), this, SLOT(aboutToHideSystemMenu()));//于隐藏前触发
 
     m_maximizeAction = new QAction(QIcon(":/main/max2"), tr("maximize"), this);
     m_minimizeAction = new QAction(QIcon(":/main/min2"), tr("minimize"), this);
