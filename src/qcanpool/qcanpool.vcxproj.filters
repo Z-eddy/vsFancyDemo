@@ -232,66 +232,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resource\skin\0.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\main\arrow.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\arrow_down.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\arrow_left.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\arrow_right.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\arrow_up.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\main\close.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\close.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\main\close2.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\main\max.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\main\max2.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\menu.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\main\min.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\main\min2.png">
-      <Filter>Resource Files</Filter>
-    </None>
     <QtRcc Include="qcanpool.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-    <None Include="resource\main\restore.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\main\restore2.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\setup.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\tools\sidebar.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\skin\state_ok.png">
-      <Filter>Resource Files</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="qcanpoold_resource.rc" />

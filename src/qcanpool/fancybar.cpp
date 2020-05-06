@@ -511,6 +511,7 @@ void FancyBarPrivate::createWindowButtons()
 {
     m_logoButton = new FancyButton();
     m_logoButton->setHasMenu(true);
+	//logo图标,在没设定的时候有个默认的图标,不知道在哪里
     m_logoButton->setIcon(QIcon(":/main/logo"));
     connect(m_logoButton, SIGNAL(menuTriggered(QMouseEvent *)), this, SLOT(systemMenuTriggered(QMouseEvent *)));
 

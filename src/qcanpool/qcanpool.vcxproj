@@ -405,27 +405,8 @@
     <None Include="resource\qm\qcanpool_zh_CN.ts" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="resource\skin\0.jpg" />
-    <None Include="resource\main\arrow.png" />
-    <None Include="resource\tools\arrow_down.png" />
-    <None Include="resource\tools\arrow_left.png" />
-    <None Include="resource\tools\arrow_right.png" />
-    <None Include="resource\tools\arrow_up.png" />
-    <None Include="resource\main\close.png" />
-    <None Include="resource\tools\close.png" />
-    <None Include="resource\main\close2.png" />
-    <None Include="resource\main\max.png" />
-    <None Include="resource\main\max2.png" />
-    <None Include="resource\tools\menu.png" />
-    <None Include="resource\main\min.png" />
-    <None Include="resource\main\min2.png" />
     <QtRcc Include="qcanpool.qrc">
     </QtRcc>
-    <None Include="resource\main\restore.png" />
-    <None Include="resource\main\restore2.png" />
-    <None Include="resource\tools\setup.png" />
-    <None Include="resource\tools\sidebar.png" />
-    <None Include="resource\skin\state_ok.png" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="qcanpoold_resource.rc" />
