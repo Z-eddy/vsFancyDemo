@@ -128,12 +128,12 @@ public:
 
     // menu widget
     QWidget         *m_menuWidget;
-    FancyButton     *m_applicationButton;
-    QHBoxLayout     *m_appButtonLayout;
+    FancyButton     *m_applicationButton;//Application按钮
+    QHBoxLayout     *m_appButtonLayout;//容器,放置Application按钮
     QMenuBar        *m_menuBar;
-    QHBoxLayout     *m_menuAdditionalControlArea;
-    QHBoxLayout     *m_menuBarArea;
-    QSpacerItem     *m_middleSpacerItem;
+    QHBoxLayout     *m_menuAdditionalControlArea;//右边的工具栏
+    QHBoxLayout     *m_menuBarArea;//menuBar容器
+    QSpacerItem     *m_middleSpacerItem;//menuBar右侧的空白
     bool m_bMenuBarVisible;
 
     // screen
@@ -168,7 +168,7 @@ public:
     QAction *m_closeAction;
 
     QList<FancyButton *> m_additionalButtons;
-    QWidget *m_applicationWidget;
+    QWidget *m_applicationWidget;//Application按钮触发后的弹出界面
 
     QColor m_menuHoverColor;
     QColor m_menuTextColor;
@@ -490,6 +490,7 @@ void FancyBarPrivate::createMenuWidget()
     m_applicationWidget->setLayout(applicationLayout);
     m_applicationWidget->setWindowFlags(Qt::Popup);
 
+	//menuBar容器,menuBar在返回menuBar时才创建,理论上这里创建更好,因为不需要每次都判定是否已创建menuBar
     m_menuBarArea = new QHBoxLayout();
     m_menuBarArea->setMargin(0);
     m_menuBarArea->setSpacing(0);
@@ -1091,13 +1092,13 @@ void FancyBarPrivate::applicationMenuTriggered(QMouseEvent *e)
     if (button == nullptr) {
         return;
     }
-
+	//button内相对坐标
     int x = e->x();
     int y = e->y();
-    QPoint pos = e->globalPos();
+    QPoint pos = e->globalPos();//全局坐标
     pos.setX(pos.x() - x);
     pos.setY(pos.y() - y + button->height());
-    m_applicationWidget->move(pos);
+    m_applicationWidget->move(pos);//move到全局指定坐标上
     m_applicationWidget->setWindowModality(Qt::WindowModal);
     m_applicationWidget->show();
     m_applicationButton->select(false);
