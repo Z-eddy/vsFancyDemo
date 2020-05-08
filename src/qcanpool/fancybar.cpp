@@ -140,7 +140,7 @@ public:
     int m_currentScreen;
 
     // main window
-    QWidget *m_mainWidget;
+    QWidget *m_mainWidget;//fancyBar所属的parent
     QPoint m_dragPos;
     Cursor m_pressCursor;
     Cursor m_moveCursor;
@@ -604,7 +604,7 @@ void FancyBarPrivate::updateWindowButtons()
 
     m_restoreAction->setEnabled(false);
 
-    setWidgetMaximizable(m_windowFlags & Qt::WindowMaximizeButtonHint);
+    setWidgetMaximizable(m_windowFlags & Qt::WindowMaximizeButtonHint);//有最大化按钮才能最大化
 //    m_logoButton->setHasMenu((m_windowFlags & Qt::Dialog) != Qt::Dialog);
 }
 
