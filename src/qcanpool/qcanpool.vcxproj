@@ -118,7 +118,7 @@
     </ResourceCompile>
     <PostBuildEvent>
       <Command>copy "$(TargetPath)" "$(SolutionDir)bin"</Command>
-      <Message>Copy qcanpool1.dll to ..\..\..\bin</Message>
+      <Message>copy .dll to ./bin</Message>
     </PostBuildEvent>
     <QtMoc>
       <QTDIR>$(QTDIR)</QTDIR>
@@ -184,7 +184,7 @@
     </ResourceCompile>
     <PostBuildEvent>
       <Command>copy "$(TargetPath)" "$(SolutionDir)bin"</Command>
-      <Message>Copy qcanpoold1.dll to ..\..\..\bin</Message>
+      <Message>copy .dll to ./bin</Message>
     </PostBuildEvent>
     <QtMoc>
       <QTDIR>$(QTDIR)</QTDIR>

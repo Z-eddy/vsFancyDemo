@@ -99,10 +99,10 @@ public:
     QPoint calcDragPoint(QWidget *pWindow, QMouseEvent *event) const;
 
 protected:
-    void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
-    void mouseDoubleClickEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event)override;
+    void mouseReleaseEvent(QMouseEvent *event)override;
+    void mouseMoveEvent(QMouseEvent *event)override;
+    void mouseDoubleClickEvent(QMouseEvent *event)override;
 
 signals:
     void windowResizable(bool resizable);
@@ -112,25 +112,25 @@ public:
     FancyBar *q;
 
     QHBoxLayout     *m_logoLayout;
-    // title widget
+    // title widget//标题栏
     QWidget         *m_titleWidget;
-    FancyButton     *m_logoButton;
-    QuickAccessBar  *m_quickAccessBar;
-    QSpacerItem     *m_leftSpacerItem;
-    QSpacerItem     *m_rightSpacerItem;
-    QLabel          *m_titleLabel;
+    FancyButton     *m_logoButton;//logo标志
+    QuickAccessBar  *m_quickAccessBar;//快速访问栏
+    QSpacerItem     *m_leftSpacerItem;//左边空白
+    QSpacerItem     *m_rightSpacerItem;//右边空白
+    QLabel          *m_titleLabel;//标题
     QHBoxLayout     *m_titleAdditionalControlArea;//title右侧的帮助等
-    FancyButton     *m_maximizeButton;
-    FancyButton     *m_minimizeButton;
-    FancyButton     *m_closeButton;
+    FancyButton     *m_maximizeButton;//最大化
+    FancyButton     *m_minimizeButton;//最小化
+    FancyButton     *m_closeButton;//关闭
     QWidget         *m_systemGroup;//右上角关闭、最小化、最大化
     bool m_bQuickAccessVisible;
 
-    // menu widget
+    // menu widget//菜单栏
     QWidget         *m_menuWidget;
     FancyButton     *m_applicationButton;//Application按钮
     QHBoxLayout     *m_appButtonLayout;//容器,放置Application按钮
-    QMenuBar        *m_menuBar;
+    QMenuBar        *m_menuBar;//正常的菜单栏
     QHBoxLayout     *m_menuAdditionalControlArea;//右边的工具栏
     QHBoxLayout     *m_menuBarArea;//menuBar容器
     QSpacerItem     *m_middleSpacerItem;//menuBar右侧的空白
@@ -160,6 +160,7 @@ public:
     bool m_isMinimized;
     bool m_bWidgetMaximizable;
 
+	//左上角的log点击后弹出菜单
     FancyButton *m_menuButton;
     QMenu *m_menu;
     QAction *m_maximizeAction;
@@ -271,7 +272,7 @@ void FancyBarPrivate::showMenuBar(bool show)
     if (show) {
         setFixedHeight(m_titleBarHeight + m_menuBarHeight);
     } else {
-        setFixedHeight(m_titleBarHeight);
+        setFixedHeight(m_titleBarHeight);//只显示titleBar的高度
     }
 }
 
@@ -293,11 +294,13 @@ void FancyBarPrivate::setWidgetMaximizable(bool maximizable)
 void FancyBarPrivate::addAdditionalControl(QAction *action, FancyBar::AdditionalControlPosition position)
 {
     FancyButton *button = new FancyButton();
+	//直接setDefaultAction就可以了
     button->setText(action->text());
     button->setToolTip(action->toolTip());
     button->setIcon(action->icon());
     button->setDefaultAction(action);
     connect(button, SIGNAL(menuTriggered(QMouseEvent *)), this, SLOT(menuTriggered(QMouseEvent *)));
+	//应该会自动关联,不需要额外注册了
     connect(button, SIGNAL(clicked(bool)), action, SIGNAL(triggered(bool)));
 
     if (position == FancyBar::TitlePosition) {
@@ -320,13 +323,14 @@ void FancyBarPrivate::addAdditionalControl(QWidget *widget, FancyBar::Additional
 
 void FancyBarPrivate::init()
 {
+	//title、menu上下分布,左侧是logoLayout
     m_logoLayout = new QHBoxLayout();
-    m_logoLayout->setContentsMargins(0, 0, 0, 0);
+    m_logoLayout->setContentsMargins(0, 0, 0, 0);//上下左右缝隙为0
     m_logoLayout->setSpacing(0);
     createTitleWidget();
     createMenuWidget();
     QVBoxLayout *rightLayout = new QVBoxLayout();
-    rightLayout->setMargin(0);
+    rightLayout->setMargin(0);//废弃,使用setContentsMargins
     rightLayout->setSpacing(0);
     rightLayout->addWidget(m_titleWidget);
     rightLayout->addWidget(m_menuWidget);

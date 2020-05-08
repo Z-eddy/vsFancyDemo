@@ -27,16 +27,16 @@ class QMenuBar;
 class QuickAccessBar;
 class FancyBarPrivate;
 
-//���Ƶı�����
+//定制的标题栏
 class QCANPOOL_SHARED_EXPORT FancyBar : public QWidget
 {
     Q_OBJECT
 public:
-    enum AdditionalControlPosition {//���ü���Ŀؼ�����λ��
+    enum AdditionalControlPosition {//设置加入的控件所处位置
         TitlePosition, MenuPosition
     };
 
-    enum FancyStyle{
+    enum FancyStyle{//标题栏风格
       WindowStyle, ClassicStyle, MergedStyle, DialogStyle
     };
 
@@ -44,9 +44,11 @@ public:
     ~FancyBar();
 
     QMenuBar* menuBar() const;
+	//titleBar一定存在,menuBar可以隐藏
     void showMenuBar(bool show = false);
     bool isMenuBarVisible() const;
 
+	//ribbon的快速访问栏,继承自QToolBar
     QuickAccessBar* quickAccessBar() const;
     void showQuickAccess(bool show = true);
     bool isQuickAccessVisible() const;
