@@ -623,7 +623,7 @@ void FancyBarPrivate::registerWidget(QWidget *widget)
 void FancyBarPrivate::restoreWidget(QWidget *pWidget)
 {
     m_isMaximized = false;
-    pWidget->setGeometry(m_normalRect);
+    pWidget->setGeometry(m_normalRect);//主窗口最大化?
     emit windowResizable(true);
 }
 
