@@ -943,9 +943,9 @@ void FancyBarPrivate::mouseReleaseEvent(QMouseEvent *event)
     m_bLeftButtonPressed = false;
 
     // maximize on the top of the screen
-    if (!m_isMaximized) {
-        if (event->globalY() == 0) {
-            m_mainWidget->move(m_mainWidget->frameGeometry().x(), 10);
+    if (!m_isMaximized) {//不是最大化时
+        if (event->globalY() == 0) {//如果在顶上,则直接最大化
+            m_mainWidget->move(m_mainWidget->frameGeometry().x(), 10);//移动到屏幕下10像素
 
             if (m_bWidgetMaximizable) {
                 emit m_maximizeButton->click();
@@ -953,7 +953,7 @@ void FancyBarPrivate::mouseReleaseEvent(QMouseEvent *event)
         } else {
             int y = m_mainWidget->frameGeometry().y();
 
-            if (y < 0) {
+            if (y < 0) {//如果超过了屏幕上方,则自动拉回到屏幕下面10像素
                 m_mainWidget->move(m_mainWidget->frameGeometry().x(), 10);
             }
         }
