@@ -52,8 +52,14 @@ int ScreenHelper::currentScreen(const int x)
     int width;
 
     for (int i = 0; i < m_screenRects.count(); i++) {
+		/*
+		如果用的双屏(左边笔记本屏幕/右边普通1920屏幕),那么width如下
+		width=0+1366
+		width=1366+1920
+		*/
         width = m_screenRects.at(i).x() + m_screenRects.at(i).width();
 
+		//根据软件坐标点(左上角顶点所在位置),确认所在屏幕
         if (x > width) {
             continue;
         }
