@@ -31,6 +31,7 @@ class Cursor
 public:
     Cursor();
     void reset();
+	//计算鼠标是否在窗口边缘
     void recalculate(const QPoint &globalMousePos, const QRect &frameRect);
 
 public:

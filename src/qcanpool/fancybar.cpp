@@ -32,6 +32,7 @@
 #include <QEvent>
 #include <QMainWindow>
 #include <QApplication>
+#include<QDebug>
 
 #define TITLE_BAR_HEIGHT    25
 #define MENU_BAR_HEIGHT     25
@@ -75,12 +76,12 @@ public:
     bool windowTitleChange(QObject *obj);
     bool windowIconChange(QObject *obj);
     void windowSizeChange(QObject *obj);
-    void windowStateChange(QObject *obj);
+    void windowStateChange(QObject *obj);//最大最小化
 
     // mouse event
     void handleWidgetMouseEvent(QObject *obj, QEvent *event);
     // 更新鼠标样式
-    void updateCursorShape(const QPoint &gMousePos);
+    void updateCursorShape(const QPoint &gMousePos);//上下左右边框拉伸标志
     // 重置窗体大小
     void resizeWidget(const QPoint &gMousePos);
     // 移动窗体
@@ -144,7 +145,7 @@ public:
     QPoint m_dragPos;
     Cursor m_pressCursor;
     Cursor m_moveCursor;
-    bool m_bEdgePressed;
+    bool m_bEdgePressed;//是否鼠标在窗口边缘按下
     bool m_bCursorShapeChanged;
     Qt::WindowFlags m_windowFlags;
     bool m_bWidgetResizable;
@@ -154,7 +155,7 @@ public:
     QRect m_normalRect;
     QPoint m_movePoint;
     QPoint m_dragPoint;
-    bool m_bLeftButtonPressed;
+    bool m_bLeftButtonPressed;//鼠标左键按下
 
     bool m_isMaximized;
     bool m_isMinimized;
@@ -631,13 +632,15 @@ void FancyBarPrivate::maximizeWidget(QWidget *pWidget)
 {
     // 在窗体大小改变前更新值,因为事件过滤响应随机
     m_isMaximized = true;
-    // 计算最大化所在屏幕
+    // 计算软件坐标
     int x = pWidget->frameGeometry().x() + pWidget->frameGeometry().width() / 2;
     ScreenHelper sreen;
+	//根据软件坐标判定所在多屏的屏幕
     m_currentScreen = sreen.currentScreen(x);
+	//根据所在屏幕获得屏幕的尺寸
     QRect rect = sreen.screenRect(m_currentScreen);
     pWidget->setGeometry(rect);
-    emit windowResizable(false);
+    emit windowResizable(false);//更改最大化按钮状态?
 }
 
 bool FancyBarPrivate::windowTitleChange(QObject *obj)
@@ -694,7 +697,7 @@ void FancyBarPrivate::windowStateChange(QObject *obj)
 {
     Q_UNUSED(obj);
 
-    if (m_isMaximized) {
+    if (m_isMaximized) {//最大化时显示为可还原
         m_maximizeButton->setToolTip(tr("restore"));
         m_maximizeButton->setProperty("maximizeProperty", "restore");
         m_maximizeButton->setIcon(QIcon(":/main/restore"));
@@ -778,7 +781,7 @@ void FancyBarPrivate::resizeWidget(const QPoint &gMousePos)
     int top = origRect.top();
     int right = origRect.right();
     int bottom = origRect.bottom();
-    origRect.getCoords(&left, &top, &right, &bottom);
+    origRect.getCoords(&left, &top, &right, &bottom);//作用重复?二次赋同样的值
     int minWidth = m_mainWidget->minimumWidth();
     int minHeight = m_mainWidget->minimumHeight();
 
@@ -838,7 +841,7 @@ void FancyBarPrivate::handleMousePressEvent(QMouseEvent *event)
         m_bEdgePressed = true;
         QRect frameRect = m_mainWidget->frameGeometry();
         m_pressCursor.recalculate(event->globalPos(), frameRect);
-        m_dragPos = event->globalPos() - frameRect.topLeft();
+        m_dragPos = event->globalPos() - frameRect.topLeft();//相对于主窗口,鼠标的坐标
     }
 }
 
@@ -856,7 +859,7 @@ void FancyBarPrivate::handleMouseReleaseEvent(QMouseEvent *event)
 
 void FancyBarPrivate::handleMouseMoveEvent(QMouseEvent *event)
 {
-    if (m_bEdgePressed) {
+    if (m_bEdgePressed) {//鼠标按下中拖动,拉伸窗口
         if (m_bWidgetResizable && m_pressCursor.m_bOnEdges) {
             resizeWidget(event->globalPos());
         }
@@ -865,7 +868,7 @@ void FancyBarPrivate::handleMouseMoveEvent(QMouseEvent *event)
 //        {
 //            moveWidget(event->globalPos());
 //        }
-    } else if (m_bWidgetResizable) {
+    } else if (m_bWidgetResizable) {//没按下只检测鼠标是否在边缘,用于改变形状为拖动
         updateCursorShape(event->globalPos());
     }
 }
@@ -874,14 +877,14 @@ void FancyBarPrivate::handleLeaveEvent(QEvent *event)
 {
     Q_UNUSED(event);
 
-    if (!m_bEdgePressed) {
+    if (!m_bEdgePressed) {//没有按住则恢复鼠标普通形状
         m_mainWidget->unsetCursor();
     }
 }
 
 void FancyBarPrivate::handleHoverMoveEvent(QHoverEvent *event)
 {
-    if (!m_bEdgePressed && m_bWidgetResizable) {
+    if (!m_bEdgePressed && m_bWidgetResizable) {//没有按下鼠标且窗口未最大化
         updateCursorShape(m_mainWidget->mapToGlobal(event->pos()));
     }
 }
@@ -903,6 +906,7 @@ QPoint FancyBarPrivate::calcDragPoint(QWidget *pWindow, QMouseEvent *event) cons
     QPoint point;
     point.setY(0);
 
+	//不懂这种固化x值范围的意义
     if (mouseX - screenX < orgWidth / 2) {
         point.setX(screenX);
     } else if (maxWidth - mouseX < orgWidth / 2) {
@@ -910,6 +914,7 @@ QPoint FancyBarPrivate::calcDragPoint(QWidget *pWindow, QMouseEvent *event) cons
     } else {
         point.setX(mouseX - orgWidth / 2);
     }
+	qDebug() << point<<orgWidth;
 
     return point;
 }
@@ -922,7 +927,7 @@ void FancyBarPrivate::mousePressEvent(QMouseEvent *event)
 
         if (pWindow->isTopLevel()) {
             if (m_isMaximized) {
-                m_dragPoint = calcDragPoint(pWindow, event);
+                m_dragPoint = calcDragPoint(pWindow, event);//最大化时,除了点中间拖动,点左右都是整个窗口最左\最右拖动
                 m_movePoint = event->globalPos() - m_dragPoint;
             } else {
                 m_movePoint = event->globalPos() - pWindow->pos();
