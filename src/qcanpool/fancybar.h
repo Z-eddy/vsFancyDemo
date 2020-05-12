@@ -76,7 +76,7 @@ protected:
     virtual bool eventFilter(QObject* object, QEvent* event);
 
 private:
-    FancyBarPrivate *d;
+    FancyBarPrivate *d;//所有细节隐藏,更强的封装特性
 };
 
 #endif // FANCYBAR_H

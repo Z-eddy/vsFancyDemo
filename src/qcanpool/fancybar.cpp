@@ -184,7 +184,7 @@ public:
     FancyBar::FancyStyle m_style;
 
 private slots:
-    void slotWindowButtonClicked();
+    void slotWindowButtonClicked();//最大化、最小化、关闭按钮触发
     void aboutToShowSystemMenu();
     void aboutToHideSystemMenu();
     void systemMenuTriggered(QMouseEvent *e);
@@ -914,7 +914,6 @@ QPoint FancyBarPrivate::calcDragPoint(QWidget *pWindow, QMouseEvent *event) cons
     } else {
         point.setX(mouseX - orgWidth / 2);
     }
-	qDebug() << point<<orgWidth;
 
     return point;
 }
@@ -964,22 +963,22 @@ void FancyBarPrivate::mouseReleaseEvent(QMouseEvent *event)
 
 void FancyBarPrivate::mouseMoveEvent(QMouseEvent *event)
 {
-    if (m_bLeftButtonPressed) {
+    if (m_bLeftButtonPressed) {//在左键点击时拖动
         QWidget *pWindow = m_mainWidget;
 
         if (pWindow->isTopLevel()) {
-            if (m_bWidgetMaximizable && m_isMaximized) {
-//                restoreWidget(pWindow);
+            if (m_bWidgetMaximizable && m_isMaximized) {//最大化时拖动
+				//restoreWidget(pWindow);
                 // modified on 2017-7-27 22:54:15 , drag on miximization
-                if (event->globalY() > 2 * m_moveCursor.m_nBorderWidth) {
+                if (event->globalY() > 2 * m_moveCursor.m_nBorderWidth) {//必须超过左边边缘10个像素点才能变成窗口形态
                     m_dragPoint = calcDragPoint(pWindow, event);
                     m_movePoint = event->globalPos() - m_dragPoint;
                     restoreWidget(pWindow);
                 }
-            } else {
-                if (m_bWidgetResizable && m_pressCursor.m_bOnEdges) {
+            } else {//窗口时
+                if (m_bWidgetResizable && m_pressCursor.m_bOnEdges) {//拖动边缘
                     event->ignore();
-                } else {
+                } else {//移动窗口
                     pWindow->move(event->globalPos() - m_movePoint);
                 }
             }
@@ -1002,13 +1001,13 @@ void FancyBarPrivate::slotWindowButtonClicked()
     QWidget *pWindow = m_mainWidget;
 
     if (pWindow) {
-        if (pButton == m_minimizeButton) {
+        if (pButton == m_minimizeButton) {//最小化按钮点击
             pWindow->showMinimized();
             m_isMinimized = true;
-        } else if (pButton == m_maximizeButton) {
-            if (m_isMaximized) {
+        } else if (pButton == m_maximizeButton) {//最大化按钮点击
+            if (m_isMaximized) {//已经最大化则回复窗口形状
                 restoreWidget(pWindow);
-            } else {
+            } else {//窗口形状则最大化
                 m_normalRect = pWindow->frameGeometry();
                 maximizeWidget(pWindow);
             }
@@ -1031,7 +1030,7 @@ void FancyBarPrivate::aboutToHideSystemMenu()
 }
 
 void FancyBarPrivate::systemMenuTriggered(QMouseEvent *e)
-{
+{//点击logo按钮弹出菜单
     FancyButton *button = qobject_cast<FancyButton *>(sender());
 
     if (button == nullptr) {
@@ -1126,7 +1125,7 @@ FancyBar::FancyBar(QWidget *parent)
     QVBoxLayout *layout = new QVBoxLayout();
     layout->setMargin(0);
     layout->setSpacing(0);
-    layout->addWidget(d);
+    layout->addWidget(d);//不加入就没有头
     setLayout(layout);
 
     if (s_backgroundColor.isValid()) {
@@ -1142,7 +1141,7 @@ FancyBar::~FancyBar()
 
 QMenuBar *FancyBar::menuBar() const
 {
-    if (d->m_menuBar == nullptr) {
+    if (d->m_menuBar == nullptr) {//没有则建立
         d->m_menuBar = new QMenuBar();
         d->m_menuBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
         d->updateMenuColor();
@@ -1230,7 +1229,7 @@ void FancyBar::addAdditionalControl(QWidget *widget, FancyBar::AdditionalControl
 void FancyBar::setApplicationWidget(const QString &label, QWidget *widget)
 {
     d->m_applicationButton->setText(label);
-    d->m_applicationWidget->layout()->addWidget(widget);
+    d->m_applicationWidget->layout()->addWidget(widget);//Appliceiont按钮点击后的窗口增加项
 }
 
 void FancyBar::setApplicationButtonBkColor(const QColor &color)
