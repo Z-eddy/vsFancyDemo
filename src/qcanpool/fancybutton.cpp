@@ -27,7 +27,7 @@
 FancyButton::FancyButton(QWidget *parent)
     : QToolButton(parent)
 {
-    setToolButtonStyle(Qt::ToolButtonIconOnly);
+    setToolButtonStyle(Qt::ToolButtonIconOnly);//按钮只显示图标
 //    setIconSize(QSize(18,18));
     setAutoRaise(true);
     m_bMouseHover = false;
@@ -52,7 +52,7 @@ void FancyButton::select(bool selected)
     if (!selected) {
         m_bMouseHover = false;
     }
-    update();
+    update();//触发重绘
 }
 
 void FancyButton::setTextColor(const QColor &color)
@@ -86,7 +86,7 @@ void FancyButton::setHasMenu(bool has)
 void FancyButton::setHasBorder(bool has)
 {
     m_hasBorder = has;
-    setColor(m_textColor);
+    this->setColor(m_textColor);//设定Border后更新
     update();
 }
 
@@ -99,7 +99,7 @@ void FancyButton::enterEvent(QEvent *event)
 {
     Q_UNUSED(event);
 
-    if (!isEnabled()) {
+    if (!isEnabled()) {//按钮如果是disable则返回
         return;
     }
 
@@ -121,7 +121,7 @@ void FancyButton::mousePressEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton) {
         m_bMousePress = true;
 
-        if (m_hasMenu || actionHasMenu()) {
+        if (m_hasMenu || actionHasMenu()) {//如果有关联的菜单则触发
             emit menuTriggered(event);
         }
 
@@ -144,6 +144,7 @@ void FancyButton::mouseReleaseEvent(QMouseEvent *event)
 
 void FancyButton::paintEvent(QPaintEvent *event)
 {
+	//根据目前按钮状态改变颜色
     if (m_bMousePress) {
         painterInfo(m_pressColor);
     } else if (m_bMouseHover) {
