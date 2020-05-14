@@ -42,6 +42,7 @@ public:
     void setTextColor(const QColor &color);
 
 protected:
+	//actionÊÂ¼þ
     virtual void actionEvent(QActionEvent*);
 
 private:
