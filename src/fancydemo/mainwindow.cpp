@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  **
  **  Copyright (C) 2018 MaMinJie <canpool@163.com>
  **  Contact: https://github.com/canpool
@@ -38,7 +38,7 @@
 
 #define COMPANY_NAME    QString::fromUtf8("科技有限公司")
 
-MainWindow *MainWindow::m_instance = nullptr;
+MainWindow *MainWindow::m_instance = nullptr;//全局唯一?
 
 MainWindow::MainWindow(QWidget *parent)
     : FancyWindow(parent)
@@ -47,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_styleAction = nullptr;
     m_styleActions.clear();
 
-    Theme::init();
+    Theme::init();//初始化主题
 
     m_modeStack = new FancyTabWidget(this);
     m_modeManager = new ModeManager(m_modeStack);
@@ -56,11 +56,11 @@ MainWindow::MainWindow(QWidget *parent)
     createWindow();
     createConnects();
 
-    setAcceptDrops(true);
+    setAcceptDrops(true);//允许拖动放置
 
-    setWindowTitle(tr("Qt canpool fancy demo"));
-    setWindowIcon(QIcon(":/main/logo"));
-    setMinimumSize(QSize(600,400));
+    setWindowTitle(tr("Fancy demo"));//软件名称
+    setWindowIcon(QIcon(":/main/logo"));//软件logo
+    setMinimumSize(QSize(800,600));//最小大小
     setMouseTracking(true);
 	
 	updateTheme();
@@ -79,63 +79,63 @@ MainWindow *MainWindow::instance()
 
 void MainWindow::createWindow()
 {
-    createQuickAccessBar();
-    createMenuBar();
+    createQuickAccessBar();//快速访问栏按钮
+    createMenuBar();//整条菜单栏
     createToolBar();
-    createStatusBar();
-//    createDockWidget();
-    createCentralWidget();
-    createModeBar();
-    createAdditionalControls();
+    createStatusBar();//底部状态栏
+	//createDockWidget();
+    createCentralWidget();//整体布局
+    createModeBar();//中间整个横向模块
+    createAdditionalControls();//附属模块,工具搜索区域、换肤区域
 
     createOthers();
 }
 
 void MainWindow::createQuickAccessBar()
 {
-    if (QuickAccessBar* quickAccessBar = fancyBar()->quickAccessBar())
+    if (QuickAccessBar* quickAccessBar = fancyBar()->quickAccessBar())//如果存在
     {
-        QAction* action = quickAccessBar->actionCustomizeButton();
+        QAction* action = quickAccessBar->actionCustomizeButton();//更多按钮的第一行
         action->setToolTip(tr("Customize Quick Access Bar"));
 
-        QAction* smallButton = quickAccessBar->addAction(QIcon(":/tools/new"), tr("New"));
-        smallButton->setShortcut(QKeySequence::New);
+        QAction* smallButton = quickAccessBar->addAction(QIcon(":/tools/new"), tr("New"));//新建按钮
+        smallButton->setShortcut(QKeySequence::New);//smallButton->setShortcut(tr("Ctrl+n"));
         smallButton->setToolTip(tr("New File or Project\nCtrl+N"));
         connect(smallButton, SIGNAL(triggered()), this, SLOT(slotNew()));
-//        quickAccessBar->setActionVisible(smallButton, false);
+		//quickAccessBar->setActionVisible(smallButton, false);
 
-        smallButton = quickAccessBar->addAction(QIcon(":/tools/open"), tr("Open"));
+        smallButton = quickAccessBar->addAction(QIcon(":/tools/open"), tr("Open"));//打开按钮
         smallButton->setShortcut(tr("Ctrl+O"));
         smallButton->setToolTip(tr("Open File or Project\nCtrl+O"));
-//        connect(smallButton, SIGNAL(triggered()), this, SLOT(slotOpen()));
-//        quickAccessBar->setActionVisible(smallButton, false);
+        //connect(smallButton, SIGNAL(triggered()), this, SLOT(slotOpen()));
+        //quickAccessBar->setActionVisible(smallButton, false);
 
         QMenu *menu = new QMenu(this);
         menu->addAction(tr("action1"));
         menu->addAction(tr("action2"));
         menu->addAction(tr("action3"));
         menu->addAction(tr("action4"));
-        smallButton->setMenu(menu);
+        smallButton->setMenu(menu);//打开按钮中嵌入菜单
 
-        smallButton = quickAccessBar->addAction(QIcon(":/tools/save"), tr("Save"));
+        smallButton = quickAccessBar->addAction(QIcon(":/tools/save"), tr("Save"));//保存按钮
         smallButton->setShortcut(tr("Ctrl+S"));
         smallButton->setToolTip(tr("Save the active document\nCtrl+S"));
         connect(smallButton, SIGNAL(triggered()), this, SLOT(slotSave()));
 
-        smallButton = quickAccessBar->addAction(QIcon(":/tools/save_all"), tr("Save All"));
+        smallButton = quickAccessBar->addAction(QIcon(":/tools/save_all"), tr("Save All"));//保存所有按钮
         smallButton->setShortcut(tr("Ctrl+Shift+S"));
         smallButton->setToolTip(tr("Save all active documents\nCtrl+Shift+S"));
-//        connect(smallButton, SIGNAL(triggered()), this, SLOT(pressButton()));
+		//connect(smallButton, SIGNAL(triggered()), this, SLOT(pressButton()));
 
-        smallButton = quickAccessBar->addAction(QIcon(":/tools/undo"), tr("&Undo"));
+        smallButton = quickAccessBar->addAction(QIcon(":/tools/undo"), tr("&Undo"));//撤销按钮
         smallButton->setShortcut(QKeySequence::Undo);
         smallButton->setEnabled(false);
 
-        smallButton = quickAccessBar->addAction(QIcon(":/tools/redo"), tr("&Redo"));
+        smallButton = quickAccessBar->addAction(QIcon(":/tools/redo"), tr("&Redo"));//redo按钮
         smallButton->setShortcut(QKeySequence::Redo);
-//        smallButton->setEnabled(false);
+		//smallButton->setEnabled(false);
 
-        fancyBar()->showQuickAccess(true);
+        fancyBar()->showQuickAccess(true);//显示快速访问栏
 
         fancyBar()->setBackgroundColor(QColor(0, 100, 200, 100));
     }

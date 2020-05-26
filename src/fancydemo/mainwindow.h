@@ -47,14 +47,14 @@ public:
 
 private:
     void createWindow();
-    void createQuickAccessBar();
-    void createMenuBar();
-    void createAdditionalControls();
+    void createQuickAccessBar();//快速访问栏按钮
+    void createMenuBar();//整条菜单栏
+    void createAdditionalControls();//附属模块,工具搜索区域、换肤区域
     void createToolBar();
-    void createStatusBar();
+    void createStatusBar();//底部状态栏
     void createDockWidget();
-    void createCentralWidget();
-    void createModeBar();
+    void createCentralWidget();//整体布局
+    void createModeBar();//中间整个横向模块
 
     void createOthers();
     void deleteOthers();

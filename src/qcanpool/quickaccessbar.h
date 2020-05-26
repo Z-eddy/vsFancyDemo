@@ -32,7 +32,7 @@ public:
     explicit QuickAccessBar(QWidget *parent = nullptr);
 
 public:
-    QAction* actionCustomizeButton() const;
+    QAction* actionCustomizeButton() const;//更多菜单的第一行:Customize Quick Access Bar
     void setActionVisible(QAction* action, bool visible);
     bool isActionVisible(QAction* action) const;
     int visibleCount() const;

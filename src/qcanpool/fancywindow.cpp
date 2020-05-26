@@ -57,7 +57,7 @@ FancyWindow::FancyWindow(QWidget *parent)
                    | Qt::WindowMaximizeButtonHint
                    | Qt::Window
                   );
-    connect(d->fancyBar(), SIGNAL(maximizationChanged(bool)), this, SIGNAL(resizable(bool)));
+    connect(d->fancyBar(), SIGNAL(maximizationChanged(bool)), this, SIGNAL(resizable(bool)));//信号触发信号
     this->setMenuWidget(d->fancyBar());
     this->setMouseTracking(true);
     QRect geom = ScreenHelper::normalRect();
@@ -112,7 +112,7 @@ void FancyWindow::paintEvent(QPaintEvent *event)
     QString skinName = settings.value("skin").toString();
 
     if (skinName.isEmpty()) {
-        skinName = QString(":/skin/default");
+        skinName = QString(":/skin/default");//default在qcanpool.qrc中
     }
 
     QPainter painter(this);

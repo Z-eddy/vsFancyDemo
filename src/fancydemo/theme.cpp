@@ -77,7 +77,7 @@ void Theme::init()
             }
         }
     }
-    loadTheme(theme);
+    loadTheme(theme);//‘ÿ»Î÷˜Ã‚
 }
 
 QString Theme::themeFileName()
