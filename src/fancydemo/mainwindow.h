@@ -50,7 +50,7 @@ private:
     void createQuickAccessBar();//快速访问栏按钮
     void createMenuBar();//整条菜单栏
     void createAdditionalControls();//附属模块,工具搜索区域、换肤区域
-    void createToolBar();
+    void createToolBar();//本对象不显示右键菜单,由父对象显示
     void createStatusBar();//底部状态栏
     void createDockWidget();
     void createCentralWidget();//整体布局
@@ -79,8 +79,8 @@ private slots:
 private:
     static MainWindow *m_instance;
     ModeManager *m_modeManager;
-    FancyTabWidget *m_modeStack;
-    QStatusBar *m_statusBar;
+    FancyTabWidget *m_modeStack;//主体区,整个布局
+    QStatusBar *m_statusBar;//下面的状态栏
     FancyNavBar *m_pNavBar;
 
     ChartsMode *m_pChartsMode;

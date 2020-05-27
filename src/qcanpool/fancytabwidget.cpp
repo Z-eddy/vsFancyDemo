@@ -27,6 +27,7 @@
 #include <QHBoxLayout>
 #include <QStackedLayout>
 #include <QIcon>
+#include<QDebug>
 
 class FancyTabWidgetPrivate : public QObject
 {
@@ -36,20 +37,20 @@ public:
     void updateTabBarPosition();
     void init();
 
-    FancyTabBar *m_tabBar;
-    QStackedWidget *m_stack;
-    QStatusBar *m_statusBar;
-    QWidget *m_center;
+    FancyTabBar *m_tabBar;//右侧的tab?//m_pos南北时水平,东西时垂直
+    QStackedWidget *m_stack;//左侧点击时右边整块切换?
+    QStatusBar *m_statusBar;//底部状态栏?
+    QWidget *m_center;//右侧tab1的具体窗口?
 
 //    QVBoxLayout *m_leftCorner;
 //    QVBoxLayout *m_rightCorner;
-    QHBoxLayout *m_topCorner;
+    QHBoxLayout *m_topCorner;//只有顶部的？?
 //    QHBoxLayout *m_bottomCorner;
 
-    FancyTabWidget *q;
+    FancyTabWidget *q;//持有上级类?
 
     QBoxLayout *m_layout;
-    FancyTabWidget::TabPosition m_pos;
+    FancyTabWidget::TabPosition m_pos;//到底是哪个tab
 
     MiniSplitter *m_rightSplitter;
     MiniSplitter *m_bottomSplitter;
@@ -67,24 +68,25 @@ FancyTabWidgetPrivate::~FancyTabWidgetPrivate()
 void FancyTabWidgetPrivate::updateTabBarPosition()
 {
     switch (m_pos) {
-        case FancyTabWidget::North:
-            m_tabBar->setDirection(FancyTabBar::Horizontal);
-            m_layout->setDirection(QBoxLayout::TopToBottom);
+		qDebug() << "tabPos:"<<m_pos;
+        case FancyTabWidget::North://pos在北方
+            m_tabBar->setDirection(FancyTabBar::Horizontal);//tabBar水平分布
+            m_layout->setDirection(QBoxLayout::TopToBottom);//layout布局为上到下
             break;
 
-        case FancyTabWidget::South:
-            m_tabBar->setDirection(FancyTabBar::Horizontal);
-            m_layout->setDirection(QBoxLayout::BottomToTop);
+        case FancyTabWidget::South://pos在南方
+            m_tabBar->setDirection(FancyTabBar::Horizontal);//tabBar水平向
+            m_layout->setDirection(QBoxLayout::BottomToTop);//layout布局下到上
             break;
 
-        case FancyTabWidget::West:
-            m_tabBar->setDirection(FancyTabBar::Vertical);
-            m_layout->setDirection(QBoxLayout::LeftToRight);
+        case FancyTabWidget::West://pos在西方
+            m_tabBar->setDirection(FancyTabBar::Vertical);//tabBar垂直向
+            m_layout->setDirection(QBoxLayout::LeftToRight);//layout布局左到右
             break;
 
-        case FancyTabWidget::East:
-            m_tabBar->setDirection(FancyTabBar::Vertical);
-            m_layout->setDirection(QBoxLayout::RightToLeft);
+        case FancyTabWidget::East://pos在东方
+            m_tabBar->setDirection(FancyTabBar::Vertical);//tabBar垂直向
+            m_layout->setDirection(QBoxLayout::RightToLeft);//layout布局右到左
             break;
             /*default:*/
     }

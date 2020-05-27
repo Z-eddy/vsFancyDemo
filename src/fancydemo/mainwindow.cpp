@@ -143,28 +143,28 @@ void MainWindow::createQuickAccessBar()
 
 void MainWindow::createMenuBar()
 {
-    if(QMenuBar* menuBar = fancyBar()->menuBar())
+    if(QMenuBar* menuBar = fancyBar()->menuBar())//menuBar若存在
     {
         QAction *action = new QAction(tr("action1"),this);
-        QMenu* menu = menuBar->addMenu(tr("&File"));
+        QMenu* menu = menuBar->addMenu(tr("&File"));//文件
         menu->addAction(action);
         action = new QAction(tr("action1"),this);
-        menu = menuBar->addMenu(tr("&Edit"));
+        menu = menuBar->addMenu(tr("&Edit"));//编辑
         menu->addAction(action);
         action = new QAction(tr("action1"),this);
-        menu = menuBar->addMenu(tr("&Debug"));
+        menu = menuBar->addMenu(tr("&Debug"));//Debug
         menu->addAction(action);
         action = new QAction(tr("action1"),this);
-        menu = menuBar->addMenu(tr("&View"));
+        menu = menuBar->addMenu(tr("&View"));//查看
         menu->addAction(action);
         action = new QAction(tr("action1"),this);
-        menu = menuBar->addMenu(tr("&Window"));
+        menu = menuBar->addMenu(tr("&Window"));//窗口
         menu->addAction(action);
         action = new QAction(tr("action1"),this);
-        menu = menuBar->addMenu(tr("&Tools"));
+        menu = menuBar->addMenu(tr("&Tools"));//工具
         menu->addAction(action);
         action = new QAction(tr("action1"),this);
-        menu = menuBar->addMenu(tr("&Help"));
+        menu = menuBar->addMenu(tr("&Help"));//帮助
         menu->addAction(action);
 
         fancyBar()->showMenuBar(true);
@@ -176,6 +176,7 @@ void MainWindow::createMenuBar()
 
 void MainWindow::createAdditionalControls()
 {
+	//最右上角加入附属控件,menu,help,skin
     QAction *menuAction = new QAction(QIcon(":/tools/menu"), tr("main menu"), this);
     fancyBar()->addAdditionalControl(menuAction, FancyBar::TitlePosition);
     QAction *helpAction = new QAction(QIcon(":/tools/help"), tr("Help"), this);
@@ -185,17 +186,17 @@ void MainWindow::createAdditionalControls()
     connect(skinAction, SIGNAL(triggered(bool)), this, SLOT(slotSkin()));
     fancyBar()->addAdditionalControl(skinAction, FancyBar::TitlePosition);
 
-    QMenu *menu = new QMenu();
+    QMenu *menu = new QMenu();//按钮触发的总menu
     // style
     QAction *styleActionMenu = new QAction(tr("Style"));
-    menu->addAction(styleActionMenu);
-    QMenu *styleMenu = new QMenu(this);
-    QActionGroup *actionGroup = new QActionGroup(this);
-    QAction *styleAction = new QAction(tr("Window Style"));
-    styleAction->setCheckable(true);
-    styleMenu->addAction(styleAction);
-    actionGroup->addAction(styleAction);
-    m_styleActions.append(styleAction);
+    menu->addAction(styleActionMenu);//第一个style action包含有一个嵌套menu
+    QMenu *styleMenu = new QMenu(this);//menu style中嵌套的风格选项
+    QActionGroup *actionGroup = new QActionGroup(this);//组合成组,只有一个能被选中
+    QAction *styleAction = new QAction(tr("Window Style"));//window风格
+    styleAction->setCheckable(true);//可选
+    styleMenu->addAction(styleAction);//加入界面的嵌套menu
+    actionGroup->addAction(styleAction);//加入触发组中
+    m_styleActions.append(styleAction);//加入预设风格组
     styleAction = new QAction(tr("Classic Style"));
     styleAction->setCheckable(true);
     styleMenu->addAction(styleAction);
@@ -206,30 +207,31 @@ void MainWindow::createAdditionalControls()
     styleMenu->addAction(styleAction);
     actionGroup->addAction(styleAction);
     m_styleActions.append(styleAction);
-    styleActionMenu->setMenu(styleMenu);
-    connect(actionGroup, SIGNAL(triggered(QAction*)), this, SLOT(slotSetStyle(QAction*)));
-    m_styleActions.at(0)->setChecked(true);
+    styleActionMenu->setMenu(styleMenu);//设定嵌套menu
+    connect(actionGroup, SIGNAL(triggered(QAction*)), this, SLOT(slotSetStyle(QAction*)));//触发后切换风格
+    m_styleActions.at(0)->setChecked(true);//设定第一个被选中
 
     menu->addAction(tr("action2"));
     menu->addAction(tr("action3"));
     menu->addAction(tr("action4"));
     menuAction->setMenu(menu);
 
-    QAction *action = new QAction(QIcon(":/tools/option"), tr("Option"), this);
+	//菜单栏的附件
+    QAction *action = new QAction(QIcon(":/tools/option"), tr("Option"), this);//工具按钮
     fancyBar()->addAdditionalControl(action, FancyBar::MenuPosition);
 
-    QLineEdit *lineEdit = new QLineEdit();
+    QLineEdit *lineEdit = new QLineEdit();//编辑框
     fancyBar()->addAdditionalControl(lineEdit, FancyBar::MenuPosition);
 }
 
 void MainWindow::createToolBar()
 {
-    setContextMenuPolicy(Qt::NoContextMenu);
+    setContextMenuPolicy(Qt::NoContextMenu);//本对象不显示右键菜单,由父对象显示
 }
 
 void MainWindow::createStatusBar()
 {
-//    m_statusBar = m_modeStack->statusBar();
+	//m_statusBar = m_modeStack->statusBar();//放在了初始化
 
     m_pNavBar = new FancyNavBar();
     m_pNavBar->setSideExpand(true);
@@ -245,7 +247,7 @@ void MainWindow::createStatusBar()
 //    m_pNavBar->remove(tb1);
 //    delete tb1;
 
-    m_statusBar->addWidget(m_pNavBar);
+    m_statusBar->addWidget(m_pNavBar);//加入导航栏
 }
 
 void MainWindow::createDockWidget()

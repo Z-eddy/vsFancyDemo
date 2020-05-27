@@ -62,7 +62,7 @@ class FancyTabWidgetPrivate;
 class QSplitter;
 
 class QCANPOOL_SHARED_EXPORT FancyTabWidget : public QWidget
-{
+{//整个中间区
     Q_OBJECT
 public:
     enum ActionPosition {Front, Middle, Back };
@@ -96,7 +96,7 @@ public:
     void setTabPosition(TabPosition pos);
 
     int currentIndex() const;
-    QStatusBar* statusBar() const;
+    QStatusBar* statusBar() const;//下面的状态栏
     FancyTabBar* tabBar() const;
 
     void setTabStyle(TabType type, TabStyle style);
