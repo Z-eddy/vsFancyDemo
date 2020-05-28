@@ -55,7 +55,7 @@ public:
     QWidget *m_splitLine;
 
     FancyTabBar::TabStyle m_modeStyle;
-    FancyTabBar::TabStyle m_actionStyle;
+    FancyTabBar::TabStyle m_actionStyle;//mode bar下面的开始按钮
 
     FancyTabBar *q;
 

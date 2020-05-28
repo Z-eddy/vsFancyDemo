@@ -134,7 +134,7 @@ void FancyTabWidgetPrivate::init()
     m_stack->setLineWidth(0);
 	//m_stack->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred, QSizePolicy::TabWidget));
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(240, 240, 240, 240));//背景几乎白色
+    palette.setColor(QPalette::Background, QColor(240, 240, 240, 140));//背景半透明白色
     m_stack->setPalette(palette);
     m_stack->setAutoFillBackground(true);
     connect(m_tabBar, SIGNAL(currentChanged(int)), m_stack, SLOT(setCurrentIndex(int)));

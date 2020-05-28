@@ -46,13 +46,13 @@ public:
     static MainWindow* instance();
 
 private:
-    void createWindow();
+    void createWindow();//调用各种创建,组合成窗口
     void createQuickAccessBar();//快速访问栏按钮
     void createMenuBar();//整条菜单栏
     void createAdditionalControls();//附属模块,工具搜索区域、换肤区域
     void createToolBar();//本对象不显示右键菜单,由父对象显示
     void createStatusBar();//底部状态栏
-    void createDockWidget();
+    void createDockWidget();//停靠在top,left,right,bottom的窗口
     void createCentralWidget();//整体布局
     void createModeBar();//中间整个横向模块
 
@@ -61,20 +61,21 @@ private:
 
     void createConnects();
 
+	//窗口大小设定
     void readSettings();
     void writeSettings();
 	
 public slots:
-    void updateTheme();
+    void updateTheme();//更新各部件颜色值
 	
 private slots:
-    void slotHelp();
-    void slotNew();
-    void slotSave();
+    void slotHelp();//帮助问号
+    void slotNew();//新建按钮
+    void slotSave();//保存按钮
     void slotSkin();
     void slotResizable(bool resizable);
-    void slotChangeSkin(QString skinName);
-    void slotSetStyle(QAction *action);
+    void slotChangeSkin(QString skinName);//写入注册表
+    void slotSetStyle(QAction *action);//选择主题风格,根据主题名创建的action
 
 private:
     static MainWindow *m_instance;
@@ -83,10 +84,10 @@ private:
     QStatusBar *m_statusBar;//下面的状态栏
     FancyNavBar *m_pNavBar;//导航条
 
-    ChartsMode *m_pChartsMode;
-    CustomMode *m_pCustomMode;
+    ChartsMode *m_pChartsMode;//位于mode bar上方
+    CustomMode *m_pCustomMode;//位于mode bar上方
     PaintMode *m_pPaintMode;
-    MenuMode *m_pMenuMode;
+    MenuMode *m_pMenuMode;//位于mode bar下方,Tools
     QList<QAction *> m_styleActions;
     QAction *m_styleAction;
 };

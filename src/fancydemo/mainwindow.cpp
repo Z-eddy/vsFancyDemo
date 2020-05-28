@@ -282,45 +282,46 @@ void MainWindow::createDockWidget()
 
 void MainWindow::createCentralWidget()
 {
-    setCentralWidget(m_modeStack);
+	setCentralWidget(m_modeStack);
 
-//    QTextBrowser *tb1 = new QTextBrowser(this);
-//    QTextBrowser *tb2 = new QTextBrowser(this);
-//    tb2->setFixedHeight(30);
-//    QTextBrowser *tb3 = new QTextBrowser(this);
-//    QTextBrowser *tb4 = new QTextBrowser(this);
-//    m_modeStack->addCornerWidget(tb1, FancyTabWidget::Left);
-//    m_modeStack->addCornerWidget(tb2, FancyTabWidget::Top);
-//    m_modeStack->addCornerWidget(tb3, FancyTabWidget::Right);
-//    m_modeStack->addCornerWidget(tb4, FancyTabWidget::Bottom);
+	//QTextBrowser *tb1 = new QTextBrowser(this);
+	//QTextBrowser *tb2 = new QTextBrowser(this);
+	//tb2->setFixedHeight(30);
+	//QTextBrowser *tb3 = new QTextBrowser(this);
+	//QLabel*tb4 = new QLabel("Lab");
+	//m_modeStack->addCornerWidget(tb1, FancyTabWidget::Left);
+	//m_modeStack->addCornerWidget(tb2, FancyTabWidget::Top);
+	//m_modeStack->addCornerWidget(tb3, FancyTabWidget::Right);
+	//m_modeStack->addCornerWidget(tb4, FancyTabWidget::Bottom);
 }
 
 void MainWindow::createModeBar()
 {
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(0,0,0,20));
+    palette.setColor(QPalette::Background, QColor(0,0,0,200));//几乎透明,轻微黑色
 
     FancyTabBar *modeBar = m_modeStack->tabBar();
-    modeBar->setPalette(palette);
+    modeBar->setPalette(palette);//背景几乎透明,updateTheme函数重置,因此此处意思不大
     modeBar->setAutoFillBackground(true);
 
     m_pChartsMode = new ChartsMode();
     m_pCustomMode = new CustomMode();
     m_pMenuMode = new MenuMode();
 
+	//继承自IMode的各个模式,用ModeManager添加
     m_modeManager->objectAdded(m_pCustomMode);
     m_modeManager->objectAdded(m_pChartsMode);
     m_modeManager->objectAdded(m_pMenuMode);
 
     m_modeManager->setCurrentMode(m_pCustomMode);
 
-//    m_modeManager->setEnabled(m_pChartsMode, false);
+	//m_modeManager->setEnabled(m_pChartsMode, false);
 
-    // mode action
+    // mode action//action直接用mode bar添加
     QAction *action = new QAction(QIcon(":/tools/start"), tr("Start"),this);
     action->setShortcut(tr("Ctrl+R"));
     action->setToolTip(tr("Start <i>Ctrl+R</i>"));
-//    action->setEnabled(false);
+	//action->setEnabled(false);
     modeBar->addAction(action);
 
     action = new QAction(QIcon(":/tools/suspend"), tr("Suspend"),this);
@@ -389,10 +390,10 @@ void MainWindow::slotNew()
 
     FancyDialog dialog;
     dialog.setTitleBarHeight(30);
-    dialog.addAdditionalControl(new QAction(QIcon(":/tools/new"), tr("Stop"),this));
-    dialog.addAdditionalControl(new QAction(QIcon(":/tools/open"), tr("Stop"),this));
-    dialog.addAdditionalControl(new QAction(QIcon(":/tools/save"), tr("Stop"),this));
-    dialog.addAdditionalControl(new QAction(QIcon(":/tools/cut"), tr("Stop"),this));
+    dialog.addAdditionalControl(new QAction(QIcon(":/tools/new"), tr("new"),this));
+    dialog.addAdditionalControl(new QAction(QIcon(":/tools/open"), tr("open"),this));
+    dialog.addAdditionalControl(new QAction(QIcon(":/tools/save"), tr("save"),this));
+    dialog.addAdditionalControl(new QAction(QIcon(":/tools/cut"), tr("cut"),this));
     dialog.exec();
 }
 
