@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  **
  **  Copyright (C) 2018 MaMinJie <canpool@163.com>
  **  Contact: https://github.com/canpool
@@ -28,6 +28,7 @@
 #include <QStackedLayout>
 #include <QIcon>
 #include<QDebug>
+#include<QLabel>
 
 class FancyTabWidgetPrivate : public QObject
 {
@@ -37,24 +38,24 @@ public:
     void updateTabBarPosition();
     void init();
 
-    FancyTabBar *m_tabBar;//�Ҳ��tab?//m_pos�ϱ�ʱˮƽ,����ʱ��ֱ
-    QStackedWidget *m_stack;//�����ʱ�ұ������л�?
-    QStatusBar *m_statusBar;//�ײ�״̬��?
-    QWidget *m_center;//�Ҳ�tab1�ľ��崰��?
+    FancyTabBar *m_tabBar;//设计图的mode bar
+    QStackedWidget *m_stack;//设计图的stack
+    QStatusBar *m_statusBar;//设计图的status bar
+    QWidget *m_center;//设计图上,位于mode bar右侧的整块
 
 //    QVBoxLayout *m_leftCorner;
 //    QVBoxLayout *m_rightCorner;
-    QHBoxLayout *m_topCorner;//ֻ�ж����ģ�?
+    QHBoxLayout *m_topCorner;//top窗口的layout
 //    QHBoxLayout *m_bottomCorner;
 
-    FancyTabWidget *q;//�����ϼ���?
+    FancyTabWidget *q;//持有上级类
 
     QBoxLayout *m_layout;
-    FancyTabWidget::TabPosition m_pos;//�������ĸ�tab
+    FancyTabWidget::TabPosition m_pos;//mode bard所在位置
 
-    MiniSplitter *m_rightSplitter;
-    MiniSplitter *m_bottomSplitter;
-    MiniSplitter *m_leftSplitter;
+    MiniSplitter *m_rightSplitter;//设计图的right
+    MiniSplitter *m_bottomSplitter;//设计图的bottom
+    MiniSplitter *m_leftSplitter;//设计图的left;
 };
 
 FancyTabWidgetPrivate::FancyTabWidgetPrivate()
@@ -68,25 +69,24 @@ FancyTabWidgetPrivate::~FancyTabWidgetPrivate()
 void FancyTabWidgetPrivate::updateTabBarPosition()
 {
     switch (m_pos) {
-		qDebug() << "tabPos:"<<m_pos;
-        case FancyTabWidget::North://pos�ڱ���
-            m_tabBar->setDirection(FancyTabBar::Horizontal);//tabBarˮƽ�ֲ�
-            m_layout->setDirection(QBoxLayout::TopToBottom);//layout����Ϊ�ϵ���
+        case FancyTabWidget::North://pos在北方
+            m_tabBar->setDirection(FancyTabBar::Horizontal);//tabBar水平分布
+            m_layout->setDirection(QBoxLayout::TopToBottom);//layout布局为上到下
             break;
 
-        case FancyTabWidget::South://pos���Ϸ�
-            m_tabBar->setDirection(FancyTabBar::Horizontal);//tabBarˮƽ��
-            m_layout->setDirection(QBoxLayout::BottomToTop);//layout�����µ���
+        case FancyTabWidget::South://pos在南方
+            m_tabBar->setDirection(FancyTabBar::Horizontal);//tabBar水平向
+            m_layout->setDirection(QBoxLayout::BottomToTop);//layout布局下到上
             break;
 
-        case FancyTabWidget::West://pos������
-            m_tabBar->setDirection(FancyTabBar::Vertical);//tabBar��ֱ��
-            m_layout->setDirection(QBoxLayout::LeftToRight);//layout��������
+        case FancyTabWidget::West://pos在西方
+            m_tabBar->setDirection(FancyTabBar::Vertical);//tabBar垂直向
+            m_layout->setDirection(QBoxLayout::LeftToRight);//layout布局左到右
             break;
 
-        case FancyTabWidget::East://pos�ڶ���
-            m_tabBar->setDirection(FancyTabBar::Vertical);//tabBar��ֱ��
-            m_layout->setDirection(QBoxLayout::RightToLeft);//layout�����ҵ���
+        case FancyTabWidget::East://pos在东方
+            m_tabBar->setDirection(FancyTabBar::Vertical);//tabBar垂直向
+            m_layout->setDirection(QBoxLayout::RightToLeft);//layout布局右到左
             break;
             /*default:*/
     }
@@ -127,30 +127,33 @@ void FancyTabWidgetPrivate::updateTabBarPosition()
 
 void FancyTabWidgetPrivate::init()
 {
-    m_tabBar = new FancyTabBar(q);
-    m_tabBar->setObjectName(QLatin1String("qcanpool_modebar"));
-    m_stack = new QStackedWidget(q);
+    m_tabBar = new FancyTabBar(q);//左侧的modeBar
+    m_tabBar->setObjectName(QLatin1String("qcanpool_modebar"));//用于反射机制,可以通过名字搜索到类,一般会让名字和类名一致
+    m_stack = new QStackedWidget(q);//stack模块
     m_stack->setObjectName(QLatin1String("qcanpool_modestack"));
     m_stack->setLineWidth(0);
-    //    m_stack->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred, QSizePolicy::TabWidget));
+	//m_stack->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred, QSizePolicy::TabWidget));
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(240, 240, 240, 240));
+    palette.setColor(QPalette::Background, QColor(240, 240, 240, 240));//背景几乎白色
     m_stack->setPalette(palette);
     m_stack->setAutoFillBackground(true);
     connect(m_tabBar, SIGNAL(currentChanged(int)), m_stack, SLOT(setCurrentIndex(int)));
-    connect(m_tabBar, SIGNAL(menuTriggered(int, QPoint)), q, SIGNAL(menuTriggered(int, QPoint)));
-    connect(m_stack, SIGNAL(currentChanged(int)), q, SIGNAL(currentChanged(int)));
+    connect(m_tabBar, SIGNAL(menuTriggered(int, QPoint)), q, SIGNAL(menuTriggered(int, QPoint)));//信号触发信号
+    connect(m_stack, SIGNAL(currentChanged(int)), q, SIGNAL(currentChanged(int)));//信号触发信号
     m_rightSplitter = new MiniSplitter(Qt::Horizontal, MiniSplitter::Light);
     m_bottomSplitter = new MiniSplitter(Qt::Vertical, MiniSplitter::Light);
     m_leftSplitter = new MiniSplitter(Qt::Horizontal, MiniSplitter::Light);
     m_leftSplitter->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     // top, bottom, left, right corner
-    QWidget *topWidget = new QWidget();
-    m_topCorner = new QHBoxLayout();
+    QWidget *topWidget = new QWidget();//顶部窗口
+    m_topCorner = new QHBoxLayout();//顶部窗口使用的layout,后面使用layout加入子项
     m_topCorner->setMargin(0);
     m_topCorner->setSpacing(0);
+	//m_topCorner->addWidget(new QLabel{ "testLabel0" });//显示在stack上面
     topWidget->setLayout(m_topCorner);
     topWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+
+	//右边持有stack,下面持有右边,左边持有右边,详见设计图
     // stack + right
     m_rightSplitter->addWidget(m_stack);
     m_rightSplitter->setStretchFactor(0, 1);
@@ -160,19 +163,24 @@ void FancyTabWidgetPrivate::init()
     m_bottomSplitter->setStretchFactor(0, 1);
     // left + ...
     m_leftSplitter->addWidget(m_bottomSplitter);
-    QVBoxLayout *centralLayout = new QVBoxLayout();
+
+    QVBoxLayout *centralLayout = new QVBoxLayout();//持有top,left
     centralLayout->setMargin(0);
     centralLayout->setSpacing(1);
     centralLayout->addWidget(topWidget);
     centralLayout->addWidget(m_leftSplitter);
-    m_center = new QWidget();
+
+    m_center = new QWidget();//没有初始化status bar,设计图上center应该包含了mode bar右边的所有
     m_center->setLayout(centralLayout);
-    m_layout = new QBoxLayout(QBoxLayout::LeftToRight);
+
+    m_layout = new QBoxLayout(QBoxLayout::LeftToRight);//默认从左到右排列
     m_layout->setMargin(0);
     m_layout->setSpacing(0);
-    m_layout->addWidget(m_tabBar);
-    m_layout->addWidget(m_center);
+    m_layout->addWidget(m_tabBar);//mode bar在左侧
+    m_layout->addWidget(m_center);//center在右侧
     q->setLayout(m_layout);
+
+	//this->updateTabBarPosition();//初始化其他项后,调整项位置//可以隐藏
 }
 
 FancyTabWidget::FancyTabWidget(QWidget *parent)
@@ -207,8 +215,8 @@ int FancyTabWidget::insertTab(int index, QWidget *widget, const QIcon &icon,
 {
     if (!widget)
         return -1;
-    index = d->m_stack->insertWidget(index, widget);
-    d->m_tabBar->insertTab(index, icon, label, hasMenu);
+    index = d->m_stack->insertWidget(index, widget);//index为-1时相当于appendWidget
+    d->m_tabBar->insertTab(index, icon, label, hasMenu);//mode bar插入对应的图标
 
     return index;
 }
@@ -234,8 +242,8 @@ bool FancyTabWidget::isTabEnabled(int index) const
 void FancyTabWidget::setTabVisible(int index, bool visible)
 {
     if (QWidget *w = d->m_stack->widget(index)) {
-        w->setHidden(!visible);
-        d->m_tabBar->setTabVisible(index, visible);
+        w->setHidden(!visible);//隐藏对应页面
+        d->m_tabBar->setTabVisible(index, visible);//隐藏对应按钮?
     }
 }
 
@@ -265,7 +273,7 @@ void FancyTabWidget::setTabPosition(FancyTabWidget::TabPosition pos)
         return;
     }
 
-    d->m_pos = pos;
+    d->m_pos = pos;//必须先更新,updateTabBarPosition依赖
     d->updateTabBarPosition();
 }
 
@@ -276,9 +284,9 @@ int FancyTabWidget::currentIndex() const
 
 QStatusBar *FancyTabWidget::statusBar() const
 {
-    if (d->m_statusBar == nullptr) {
+    if (d->m_statusBar == nullptr) {//调用时自动创建
         d->m_statusBar = new QStatusBar;
-        d->m_center->layout()->addWidget(d->m_statusBar);
+        d->m_center->layout()->addWidget(d->m_statusBar);//status bar加入center中
     }
 
     return d->m_statusBar;
@@ -332,7 +340,7 @@ QSplitter *FancyTabWidget::addCornerWidget(QWidget *widget, FancyTabWidget::Corn
     switch (position) {
         case Left: {
             int count = d->m_leftSplitter->count();
-            d->m_leftSplitter->insertWidget(count - 1, widget);
+            d->m_leftSplitter->insertWidget(count - 1, widget);//又不是mode bar,需要这么操作吗?
             splitter = d->m_leftSplitter;
             break;
         }
@@ -390,7 +398,7 @@ void FancyTabWidget::setBackgroundColor(const QColor &color)
 void FancyTabWidget::setCurrentIndex(int index)
 {
 //    d->m_stack->setCurrentIndex(index);
-    d->m_tabBar->setCurrentIndex(index);
+    d->m_tabBar->setCurrentIndex(index);//已经连接stack消息
 }
 
 void FancyTabWidget::hideMenu(int index)

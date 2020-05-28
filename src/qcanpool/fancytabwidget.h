@@ -77,7 +77,7 @@ public:
     int addTab(QWidget *widget, const QIcon& icon, const QString &label, bool hasMenu = false);
 
     int insertTab(int index, QWidget *widget, const QString &label, bool hasMenu = false);
-    int insertTab(int index, QWidget *widget, const QIcon &icon, const QString &label, bool hasMenu = false);
+    int insertTab(int index, QWidget *widget, const QIcon &icon, const QString &label, bool hasMenu = false);//以上4个都调用此函数,mode bar增加新的按钮
 
     void removeTab(int index);
 
@@ -97,7 +97,7 @@ public:
 
     int currentIndex() const;
     QStatusBar* statusBar() const;//下面的状态栏
-    FancyTabBar* tabBar() const;
+    FancyTabBar* tabBar() const;//mode bar
 
     void setTabStyle(TabType type, TabStyle style);
     void setTabFont(TabType type, QFont &font);

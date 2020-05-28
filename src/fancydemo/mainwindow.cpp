@@ -236,16 +236,17 @@ void MainWindow::createStatusBar()
     m_pNavBar = new FancyNavBar();
     m_pNavBar->setSideExpand(true);
 //    m_pNavBar->setVisible(false);
-    QSplitter *splitter = m_modeStack->addCornerWidget(m_pNavBar->panel(), FancyTabWidget::Bottom);
+    QSplitter *splitter = m_modeStack->addCornerWidget(m_pNavBar->panel(), FancyTabWidget::Bottom);//bottom加入的panel
     m_pNavBar->setSplitter(splitter);
 
     QTextBrowser *tb1 = new QTextBrowser(this);
     QTextBrowser *tb2 = new QTextBrowser(this);
+	//加入两个测试按钮
     m_pNavBar->add(tr("tb1"), tb1);
     m_pNavBar->add(tr("tb2"), tb2, new QLineEdit());
 
-//    m_pNavBar->remove(tb1);
-//    delete tb1;
+	//m_pNavBar->remove(tb1);
+	//delete tb1;//remove后delete
 
     m_statusBar->addWidget(m_pNavBar);//加入导航栏
 }

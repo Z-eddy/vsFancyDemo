@@ -81,7 +81,7 @@ private:
     ModeManager *m_modeManager;
     FancyTabWidget *m_modeStack;//主体区,整个布局
     QStatusBar *m_statusBar;//下面的状态栏
-    FancyNavBar *m_pNavBar;
+    FancyNavBar *m_pNavBar;//导航条
 
     ChartsMode *m_pChartsMode;
     CustomMode *m_pCustomMode;
